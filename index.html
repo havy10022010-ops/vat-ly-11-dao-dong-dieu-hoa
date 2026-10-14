@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dao động điều hòa | Vật lí 11</title>
+<style>
+:root{--navy:#10213d;--blue:#3978f6;--cyan:#37c9d5;--ink:#17233b;--muted:#66748b;--bg:#f3f7fc;--card:#fff;--line:#e1e8f2;--green:#16865c;--red:#cf4353}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);line-height:1.55}
+header{background:radial-gradient(circle at 80% 10%,#254b83 0,#152e54 34%,#0c1930 100%);color:white;padding:34px 20px 38px}
+.wrap{max-width:1120px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:800;color:#82e5ec}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;margin:10px 0 14px;letter-spacing:-.04em}.hero p{max-width:700px;color:#d3deef;margin:0;font-size:1.04rem}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.pill{border:1px solid #ffffff38;border-radius:999px;padding:6px 12px;color:#eaf4ff;font-size:.86rem}
+nav{position:sticky;top:0;z-index:10;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.navinner{max-width:1120px;margin:auto;padding:10px 20px;display:flex;gap:8px;overflow-x:auto}
+nav a{white-space:nowrap;text-decoration:none;color:#3b4a63;padding:8px 12px;border-radius:10px;font-weight:700;font-size:.9rem}nav a:hover{background:#eaf1ff;color:var(--blue)}
+main{max-width:1120px;margin:26px auto;padding:0 20px 60px}.section{margin:28px 0;scroll-margin-top:76px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:15px}.kicker{color:var(--blue);font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}h2{font-size:1.65rem;letter-spacing:-.025em;margin:3px 0}.sub{color:var(--muted);margin:0}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 30px #17233b08}
+.simgrid{display:grid;grid-template-columns:1.4fr .85fr;gap:16px}.canvaswrap{background:linear-gradient(150deg,#f8fbff,#edf5ff);border:1px solid #dbe7f8;border-radius:16px;padding:10px;position:relative}canvas{width:100%;display:block}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.84rem;color:var(--muted);padding:4px 8px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}.controls{display:grid;gap:16px}.control label{display:flex;justify-content:space-between;gap:8px;font-weight:750;font-size:.93rem}.control output{color:var(--blue);font-variant-numeric:tabular-nums}.control input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 0}.hint{font-size:.82rem;color:var(--muted);margin-top:3px}.buttons{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:11px;padding:10px 14px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer}.btn.secondary{background:#eaf1ff;color:#2455b8}.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}.metric{padding:14px;border-radius:14px;background:#f7faff;border:1px solid var(--line)}.metric .symbol{font-weight:900;color:#3978f6;font-size:1.05rem}.metric .value{font-size:1.35rem;font-weight:850;letter-spacing:-.03em;margin:3px 0}.metric small{color:var(--muted)}
+.energygrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.formula{font-size:1.05rem;background:#f4f8ff;border-radius:12px;padding:12px 14px;margin:10px 0;color:#17488d;font-weight:700;overflow-wrap:anywhere}.formula span{font-weight:500;color:var(--muted);font-size:.9rem}
+.conceptgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.concept{padding:17px;border:1px solid var(--line);border-radius:15px;background:white}.concept h3{margin:5px 0 6px;font-size:1.02rem}.concept p{margin:0;color:var(--muted);font-size:.92rem}.icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#eaf1ff;color:var(--blue);font-weight:900}
+.quiz{display:grid;gap:13px}.question{border:1px solid var(--line);border-radius:15px;padding:17px;background:#fff}.question h3{font-size:1rem;margin:0 0 11px}.options{display:grid;gap:8px}.option{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border:1px solid #e5ebf4;border-radius:10px;cursor:pointer}.option:hover{background:#f7faff}.option input{margin-top:5px;accent-color:var(--blue)}.option.correct{border-color:#72c6a4;background:#effbf5}.option.wrong{border-color:#eaa0a8;background:#fff3f4}.explain{display:none;font-size:.88rem;margin-top:10px;color:var(--muted)}.explain.show{display:block}.result{display:none;margin-top:15px;padding:17px;border-radius:14px;background:#edf8f3;border:1px solid #bfe8d5}.result.show{display:block}.result strong{font-size:1.15rem}.footer{text-align:center;color:var(--muted);font-size:.85rem;padding:20px}
+@media(max-width:800px){.simgrid,.energygrid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.conceptgrid{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column}}
+@media(max-width:480px){main{padding:0 12px 40px}.card{padding:14px}.conceptgrid{grid-template-columns:1fr}.metrics{gap:8px}.metric{padding:11px}.hero p{font-size:.96rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap hero">
+<div class="eyebrow">Vật lí 11 · Chuyên đề</div>
+<h1>Dao động điều hòa</h1>
+<p>Khám phá chuyển động qua mô phỏng tương tác, theo dõi các đại lượng tức thời và kiểm tra kiến thức bằng 6 câu trắc nghiệm.</p>
+<div class="pills"><span class="pill">Mô phỏng trực quan</span><span class="pill">Công thức trọng tâm</span><span class="pill">Quiz tự chấm điểm</span></div>
+</div></header>
+<nav><div class="navinner"><a href="#mophong">Mô phỏng</a><a href="#dac-trung">Các đại lượng</a><a href="#nang-luong">Năng lượng</a><a href="#ly-thuyet">Ghi nhớ</a><a href="#kiem-tra">Trắc nghiệm</a></div></nav>
+<main>
+<section class="section" id="mophong">
+<div class="section-head"><div><div class="kicker">01 · Khám phá</div><h2>Mô phỏng dao động</h2><p class="sub">Điều chỉnh thông số và quan sát vật chuyển động giữa hai biên.</p></div><div class="buttons"><button class="btn" id="playBtn">⏸ Tạm dừng</button><button class="btn secondary" id="resetBtn">↺ Đặt lại</button></div></div>
+<div class="simgrid">
+<div class="card">
+<div class="canvaswrap"><canvas id="motion" width="760" height="300" aria-label="Mô phỏng vật dao động điều hòa"></canvas><div class="legend"><span><i class="dot" style="background:#3978f6"></i>Vật dao động</span><span><i class="dot" style="background:#f0a33a"></i>Vị trí cân bằng O</span><span><i class="dot" style="background:#dc5365"></i>Hai vị trí biên</span></div></div>
+<div class="metrics" id="metrics">
+<div class="metric"><div class="symbol">x</div><div class="value" id="mx">0.00 cm</div><small>Li độ</small></div>
+<div class="metric"><div class="symbol">v</div><div class="value" id="mv">0.00 cm/s</div><small>Vận tốc</small></div>
+<div class="metric"><div class="symbol">a</div><div class="value" id="ma">0.00 cm/s²</div><small>Gia tốc</small></div>
+<div class="metric"><div class="symbol">φ(t)</div><div class="value" id="mphase">0.00 rad</div><small>Pha tại thời điểm t</small></div>
+</div>
+</div>
+<div class="card controls">
+<div class="control"><label for="amp">Biên độ A <output id="ampOut">5 cm</output></label><input id="amp" type="range" min="1" max="8" step=".5" value="5"><div class="hint">Khoảng cách từ O đến mỗi biên.</div></div>
+<div class="control"><label for="period">Chu kì T <output id="periodOut">4 s</output></label><input id="period" type="range" min="1" max="8" step=".5" value="4"><div class="hint">Thời gian để vật thực hiện một dao động toàn phần.</div></div>
+<div class="control"><label for="phase">Pha ban đầu φ₀ <output id="phaseOut">0 rad</output></label><input id="phase" type="range" min="-3.14" max="3.14" step=".1" value="0"><div class="hint">x = A cos(ωt + φ₀).</div></div>
+<div class="control"><label for="time">Thời gian t <output id="timeOut">0.00 s</output></label><input id="time" type="range" min="0" max="8" step=".01" value="0"><div class="hint">Kéo thanh trượt để xem trạng thái ở từng thời điểm.</div></div>
+<div class="buttons"><button class="btn secondary" id="stepBack">− 0,1 s</button><button class="btn secondary" id="stepForward">+ 0,1 s</button></div>
+<div class="formula">ω = 2π/T <span> · tần số góc</span><br>x = A cos(ωt + φ₀)</div>
+</div>
+</div>
+</section>
+<section class="section" id="dac-trung">
+<div class="section-head"><div><div class="kicker">02 · Đại lượng</div><h2>Các đặc trưng của dao động điều hòa</h2><p class="sub">Giá trị được cập nhật trực tiếp theo mô phỏng.</p></div></div>
+<div class="metrics">
+<div class="metric"><div class="symbol">T</div><div class="value" id="mT">4.00 s</div><small>Chu kì</small></div>
+<div class="metric"><div class="symbol">f</div><div class="value" id="mf">0.250 Hz</div><small>Tần số f = 1/T</small></div>
+<div class="metric"><div class="symbol">φ₀</div><div class="value" id="mphi0">0.00 rad</div><small>Pha ban đầu</small></div>
+<div class="metric"><div class="symbol">ω</div><div class="value" id="momega">1.571 rad/s</div><small>Tần số góc 2π/T</small></div>
+</div>
+<div class="energygrid" style="margin-top:15px">
+<div class="card"><h3>Phương trình và chuyển động</h3><div class="formula" id="equation">x = 5 cos(1.571t + 0) cm</div><p class="sub">Vận tốc và gia tốc tức thời:</p><div class="formula" id="vformula">v = −Aω sin(ωt + φ₀)</div><div class="formula" id="aformula">a = −ω²x</div></div>
+<div class="card"><h3>Đọc nhanh vị trí</h3><p id="stateText">Vật đang ở vị trí biên dương.</p><div class="formula">Ở biên: v = 0, |a| lớn nhất<br>Qua O: |v| lớn nhất, a = 0</div><p class="hint">Quy ước chiều dương hướng sang phải. Các giá trị v, a mang dấu cho biết chiều.</p></div>
+</div>
+</section>
+<section class="section" id="nang-luong">
+<div class="section-head"><div><div class="kicker">03 · Năng lượng</div><h2>Động năng và thế năng</h2><p class="sub">Mô hình lò xo lý tưởng, bỏ qua ma sát; cơ năng được bảo toàn.</p></div></div>
+<div class="energygrid">
+<div class="card"><h3>Phân bố năng lượng</h3><p class="sub">Kéo thanh trượt riêng để xem năng lượng tại thời điểm mong muốn.</p><div class="control" style="margin:12px 0 8px"><label for="energyTime">Thời gian năng lượng <output id="energyTimeOut">0.00 s</output></label><input id="energyTime" type="range" min="0" max="8" step="0.01" value="0"><div class="hint">Thanh trượt này độc lập với mô phỏng vị trí ở phía trên.</div></div><div class="buttons" style="margin-bottom:10px"><button class="btn secondary" id="energyBack">− 0,1 s</button><button class="btn secondary" id="energyForward">+ 0,1 s</button><button class="btn secondary" id="energySync">↔ Đồng bộ với mô phỏng</button></div><canvas id="energy" width="600" height="300" aria-label="Biểu đồ đường động năng, thế năng và cơ năng"></canvas><div class="legend"><span><i class="dot" style="background:#3978f6"></i>Động năng Wđ</span><span><i class="dot" style="background:#37b8a1"></i>Thế năng Wt</span></div></div>
+<div class="card"><h3>Công thức năng lượng</h3><div class="formula">W = ½kA² = không đổi</div><div class="formula">Wđ = ½mv² = W sin²(ωt + φ₀)</div><div class="formula">Wt = ½kx² = W cos²(ωt + φ₀)</div><div class="metrics" style="grid-template-columns:1fr 1fr"><div class="metric"><div class="symbol">Wđ/W</div><div class="value" id="mEk">0%</div><small>Tỉ lệ động năng</small></div><div class="metric"><div class="symbol">Wt/W</div><div class="value" id="mEp">100%</div><small>Tỉ lệ thế năng</small></div></div><p class="hint">Chưa chọn khối lượng và độ cứng lò xo, nên năng lượng hiển thị theo tỉ lệ phần trăm cơ năng W.</p></div>
+</div>
+</section>
+<section class="section" id="ly-thuyet">
+<div class="section-head"><div><div class="kicker">04 · Ghi nhớ</div><h2>Ba ý quan trọng</h2></div></div>
+<div class="conceptgrid">
+<div class="concept"><div class="icon">↔</div><h3>Phương trình</h3><p>x = A cos(ωt + φ₀). A là biên độ, ω là tần số góc, φ₀ là pha ban đầu.</p></div>
+<div class="concept"><div class="icon">⏱</div><h3>Chu kì và tần số</h3><p>T là thời gian cho một dao động toàn phần; f = 1/T và ω = 2πf = 2π/T.</p></div>
+<div class="concept"><div class="icon">⚡</div><h3>Năng lượng</h3><p>Ở biên, thế năng cực đại và động năng bằng 0. Qua vị trí cân bằng, động năng cực đại.</p></div>
+</div>
+</section>
+<section class="section" id="kiem-tra">
+<div class="section-head"><div><div class="kicker">05 · Tự kiểm tra</div><h2>6 câu trắc nghiệm</h2><p class="sub">Chọn một đáp án cho mỗi câu, sau đó bấm “Chấm bài” để xem kết quả và lời giải.</p></div></div>
+<div class="quiz" id="quiz"></div>
+<div class="buttons" style="margin-top:15px"><button class="btn" id="gradeBtn">Chấm bài</button><button class="btn secondary" id="quizReset">Làm lại</button></div>
+<div class="result" id="result" aria-live="polite"></div>
+</section>
+<div class="footer">Tài liệu ôn tập tương tác · Vật lí 11 · Dao động điều hòa</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const amp=$('amp'),period=$('period'),phase=$('phase'),time=$('time'),energyTime=$('energyTime');
+let playing=true,last=performance.now();
+const motion=$('motion'),ctx=motion.getContext('2d'),energy=$('energy'),ectx=energy.getContext('2d');
+function fmt(n,d=2){return (Math.abs(n)<1e-9?0:n).toFixed(d)}
+function vals(){let A=+amp.value,T=+period.value,p=+phase.value,t=+time.value,w=2*Math.PI/T,th=w*t+p;return {A,T,p,t,w,th,x:A*Math.cos(th),v:-A*w*Math.sin(th),a:-A*w*w*Math.cos(th),ek:Math.sin(th)**2,ep:Math.cos(th)**2}}
+function drawMotion(s){
+ const c=motion, g=ctx, W=c.width,H=c.height;g.clearRect(0,0,W,H);
+ const mid=155,left=78,right=W-48,scale=(right-left)/(2*s.A+2),x0=(left+right)/2;
+ // track
+ g.lineWidth=2;g.strokeStyle='#c5d5ea';g.beginPath();g.moveTo(left,mid);g.lineTo(right,mid);g.stroke();
+ // tick marks and labels
+ const positions=[{x:x0-s.A*scale,label:'−A',col:'#dc5365'},{x:x0,label:'O',col:'#f0a33a'},{x:x0+s.A*scale,label:'+A',col:'#dc5365'}];
+ positions.forEach((p,i)=>{g.strokeStyle=p.col;g.lineWidth=i===1?2.5:2;g.setLineDash(i===1?[]:[5,5]);g.beginPath();g.moveTo(p.x,mid-48);g.lineTo(p.x,mid+47);g.stroke();g.setLineDash([]);g.fillStyle=p.col;g.font='bold 15px system-ui';g.textAlign='center';g.fillText(p.label,p.x,mid+70);});
+ // arrow
+ g.strokeStyle='#90a7c5';g.fillStyle='#90a7c5';g.lineWidth=1.5;g.beginPath();g.moveTo(left,mid+93);g.lineTo(right,mid+93);g.stroke();g.beginPath();g.moveTo(right,mid+93);g.lineTo(right-8,mid+88);g.lineTo(right-8,mid+98);g.closePath();g.fill();g.font='12px system-ui';g.textAlign='left';g.fillText('Chiều dương',right-94,mid+113);
+ const px=x0+s.x*scale;
+ // displacement vector
+ g.strokeStyle='#3978f6';g.lineWidth=3;g.beginPath();g.moveTo(x0,mid-4);g.lineTo(px,mid-4);g.stroke();
+ g.fillStyle='#3978f6';g.beginPath();g.arc(px,mid,14,0,Math.PI*2);g.fill();g.strokeStyle='white';g.lineWidth=3;g.stroke();
+ g.fillStyle='#10213d';g.font='bold 15px system-ui';g.textAlign='center';g.fillText('Vật',px,mid-25);
+ g.fillStyle='#596b84';g.font='13px system-ui';g.textAlign='left';g.fillText(`t = ${fmt(s.t)} s`,18,24);g.fillText(`x = ${fmt(s.x)} cm`,18,44);
+ g.fillStyle='#3978f6';g.fillText(`A = ${fmt(s.A)} cm`,18,64);
+}
+function drawEnergy(s){
+ const c=energy,g=ectx,W=c.width,H=c.height;g.clearRect(0,0,W,H);
+ const x0=48,yTop=24,yBottom=190,plotW=W-72,plotH=yBottom-yTop;
+ // nền đồ thị
+ g.fillStyle='#fbfdff';g.fillRect(x0,yTop,plotW,plotH);
+ g.strokeStyle='#e2eaf5';g.lineWidth=1;
+ for(let k=0;k<=4;k++){let y=yTop+plotH*k/4;g.beginPath();g.moveTo(x0,y);g.lineTo(x0+plotW,y);g.stroke();}
+ g.fillStyle='#718097';g.font='12px system-ui';g.textAlign='right';g.fillText('100%',x0-8,yTop+4);g.fillText('50%',x0-8,yTop+plotH/2+4);g.fillText('0%',x0-8,yBottom+4);
+ // trục và nhãn thời gian trong một chu kì
+ g.strokeStyle='#9aacc4';g.lineWidth=1.5;g.beginPath();g.moveTo(x0,yTop);g.lineTo(x0,yBottom);g.lineTo(x0+plotW,yBottom);g.stroke();
+ const labels=['0','T/4','T/2','3T/4','T'];g.textAlign='center';g.fillStyle='#64748b';g.font='12px system-ui';
+ labels.forEach((lab,i)=>{let x=x0+plotW*i/4;g.fillText(lab,x,yBottom+18);g.strokeStyle='#e2eaf5';g.beginPath();g.moveTo(x,yTop);g.lineTo(x,yBottom);g.stroke();});
+ // cơ năng không đổi
+ g.save();g.setLineDash([7,5]);g.strokeStyle='#f0a33a';g.lineWidth=3;g.beginPath();g.moveTo(x0,yTop);g.lineTo(x0+plotW,yTop);g.stroke();g.restore();
+ // vùng năng lượng và đường cong mượt
+ function curve(fn,fill,stroke){g.beginPath();for(let i=0;i<=240;i++){let th=i/240*Math.PI*2,val=fn(th),x=x0+plotW*i/240,y=yBottom-val*plotH;if(i===0)g.moveTo(x,y);else g.lineTo(x,y);}g.lineTo(x0+plotW,yBottom);g.lineTo(x0,yBottom);g.closePath();g.fillStyle=fill;g.fill();g.beginPath();for(let i=0;i<=240;i++){let th=i/240*Math.PI*2,val=fn(th),x=x0+plotW*i/240,y=yBottom-val*plotH;if(i===0)g.moveTo(x,y);else g.lineTo(x,y);}g.strokeStyle=stroke;g.lineWidth=3;g.stroke();}
+ curve(th=>Math.sin(th)**2,'rgba(57,120,246,.22)','#3978f6');
+ curve(th=>Math.cos(th)**2,'rgba(55,184,161,.20)','#25ae98');
+ // marker follows current phase, including initial phase
+ const norm=((s.th%(2*Math.PI))+2*Math.PI)%(2*Math.PI),cx=x0+norm/(2*Math.PI)*plotW;
+ g.strokeStyle='#f0a33a';g.lineWidth=2.5;g.beginPath();g.moveTo(cx,yTop-3);g.lineTo(cx,yBottom);g.stroke();g.fillStyle='#f0a33a';g.beginPath();g.arc(cx,yTop,4.5,0,Math.PI*2);g.fill();
+ // schematic positions of oscillator
+ const sy=258, sx1=76,sx2=W/2,sx3=W-76;
+ g.strokeStyle='#a8b8cd';g.lineWidth=2;g.beginPath();g.moveTo(sx1,sy);g.lineTo(sx3,sy);g.stroke();
+ [[sx1,'−A','#dc5365'],[sx2,'O','#3978f6'],[sx3,'+A','#dc5365']].forEach(([x,label,col])=>{g.strokeStyle=col;g.setLineDash([4,4]);g.beginPath();g.moveTo(x,sy-25);g.lineTo(x,sy+16);g.stroke();g.setLineDash([]);g.fillStyle=col;g.beginPath();g.arc(x,sy,8,0,Math.PI*2);g.fill();g.fillStyle='#334155';g.font='bold 12px system-ui';g.textAlign='center';g.fillText(label,x,sy+31);});
+ g.fillStyle='#64748b';g.font='11px system-ui';g.textAlign='left';g.fillText('Sơ đồ vị trí: biên trái · cân bằng · biên phải',12,H-5);
+}
+function update(){
+ const s=vals();
+ const es={...s,t:+energyTime.value,th:s.w*(+energyTime.value)+s.p};$('ampOut').textContent=`${fmt(s.A,1)} cm`;$('periodOut').textContent=`${fmt(s.T,1)} s`;$('phaseOut').textContent=`${fmt(s.p,1)} rad`;$('timeOut').textContent=`${fmt(s.t)} s`;energyTime.max=time.max;$('energyTimeOut').textContent=`${fmt(es.t)} s`;
+ $('mx').textContent=`${fmt(s.x)} cm`;$('mv').textContent=`${fmt(s.v)} cm/s`;$('ma').textContent=`${fmt(s.a)} cm/s²`;$('mphase').textContent=`${fmt(s.th)} rad`;
+ $('mT').textContent=`${fmt(s.T)} s`;$('mf').textContent=`${fmt(1/s.T,3)} Hz`;$('mphi0').textContent=`${fmt(s.p)} rad`;$('momega').textContent=`${fmt(s.w,3)} rad/s`;
+ $('equation').textContent=`x = ${fmt(s.A,1)} cos(${fmt(s.w,3)}t + ${fmt(s.p,2)}) cm`;
+ $('vformula').textContent=`v = ${fmt(-s.A*s.w,2)} sin(${fmt(s.w,3)}t + ${fmt(s.p,2)}) cm/s`;
+ $('aformula').textContent=`a = −${fmt(s.w*s.w,3)}x cm/s²`;
+ $('mEk').textContent=`${Math.round(es.ek*100)}%`;$('mEp').textContent=`${Math.round(es.ep*100)}%`;
+ const tol=.15;if(Math.abs(Math.abs(s.x)-s.A)<tol)$('stateText').textContent=s.x>0?'Vật ở gần biên dương: vận tốc gần bằng 0, gia tốc hướng về O.':'Vật ở gần biên âm: vận tốc gần bằng 0, gia tốc hướng về O.';
+ else if(Math.abs(s.x)<tol)$('stateText').textContent='Vật đang qua vị trí cân bằng O: độ lớn vận tốc cực đại, gia tốc bằng 0.';
+ else $('stateText').textContent=s.v>0?'Vật đang chuyển động theo chiều dương.':'Vật đang chuyển động theo chiều âm.';
+ drawMotion(s);drawEnergy(es);
+}
+[amp,period,phase].forEach(el=>el.addEventListener('input',update));
+// Đồng bộ hai chiều: kéo thanh thời gian ở bất kỳ khu vực nào cũng cập nhật khu vực còn lại.
+time.addEventListener('input',()=>{energyTime.value=time.value;update()});
+energyTime.addEventListener('input',()=>{time.value=energyTime.value;update()});
+$('energyBack').addEventListener('click',()=>{energyTime.value=Math.max(0,+energyTime.value-.1);update()});
+$('energyForward').addEventListener('click',()=>{energyTime.value=Math.min(+energyTime.max,+energyTime.value+.1);update()});
+$('energySync').addEventListener('click',()=>{energyTime.value=time.value;update()});
+$('playBtn').addEventListener('click',()=>{playing=!playing;$('playBtn').textContent=playing?'⏸ Tạm dừng':'▶ Tiếp tục';last=performance.now()});
+$('resetBtn').addEventListener('click',()=>{amp.value=5;period.value=4;phase.value=0;time.value=0;energyTime.value=0;update()});
+$('stepBack').addEventListener('click',()=>{time.value=Math.max(0,+time.value-.1);update()});
+$('stepForward').addEventListener('click',()=>{time.value=Math.min(+time.max,+time.value+.1);update()});
+function animate(now){if(playing){let dt=Math.min((now-last)/1000,.05);time.value=(+time.value+dt)%(+time.max+0.001);energyTime.value=time.value;update()}last=now;requestAnimationFrame(animate)}
+const questions=[
+{level:'Nhận biết',q:'1. Với phương trình dao động điều hòa x = A cos(ωt + φ₀), biên độ A được hiểu là gì?',o:['Khoảng thời gian vật đi hết một vòng dao động','Độ lệch lớn nhất của vật so với vị trí cân bằng','Số dao động vật thực hiện trong một giây','Góc xác định trạng thái dao động tại t = 0'],a:1,e:'Biên độ A là độ lớn li độ cực đại, bằng khoảng cách từ vị trí cân bằng O đến một trong hai vị trí biên.'},
+{level:'Nhận biết',q:'2. Một vật dao động điều hòa có chu kì T = 0,25 s. Tần số f của vật là bao nhiêu?',o:['0,25 Hz','2 Hz','4 Hz','8 Hz'],a:2,e:'Dùng công thức f = 1/T = 1/0,25 = 4 Hz.'},
+{level:'Thông hiểu',q:'3. Khi vật ở vị trí biên âm (x = −A), phát biểu nào đúng?',o:['Vận tốc cực đại và gia tốc bằng 0','Vận tốc bằng 0 và gia tốc hướng về vị trí cân bằng','Vận tốc bằng 0 và gia tốc hướng ra xa vị trí cân bằng','Động năng cực đại, thế năng bằng 0'],a:1,e:'Tại biên, v = 0. Vì a = −ω²x nên khi x = −A, gia tốc dương, hướng về vị trí cân bằng O.'},
+{level:'Thông hiểu',q:'4. Một vật dao động điều hòa tại thời điểm có li độ x = A/2. Tỉ số thế năng Wt so với cơ năng W bằng bao nhiêu?',o:['25%','50%','75%','100%'],a:0,e:'Wt/W = x²/A². Với x = A/2 thì Wt/W = (A/2)²/A² = 1/4 = 25%.'},
+{level:'Vận dụng',q:'5. Vật dao động theo phương trình x = 6 cos(4πt + π/3) (cm). Chu kì dao động là bao nhiêu?',o:['0,25 s','0,5 s','2 s','4π s'],a:1,e:'So sánh với x = A cos(ωt + φ₀), ta có ω = 4π rad/s. T = 2π/ω = 2π/(4π) = 0,5 s.'},
+{level:'Vận dụng',q:'6. Một vật có biên độ A = 10 cm, tần số góc ω = 2 rad/s. Khi vật ở li độ x = 6 cm, tốc độ của vật bằng bao nhiêu?',o:['8 cm/s','12 cm/s','16 cm/s','20 cm/s'],a:2,e:'Từ v² = ω²(A² − x²), suy ra |v| = 2√(10² − 6²) = 2√64 = 16 cm/s.'}
+];
+function renderQuiz(){ $('quiz').innerHTML=questions.map((q,i)=>`<article class="question" data-q="${i}"><div style="margin-bottom:8px"><span class="pill" style="display:inline-block;background:${q.level==='Nhận biết'?'#eaf1ff':q.level==='Thông hiểu'?'#e8f8f2':'#fff2df'};border:0;color:${q.level==='Nhận biết'?'#2455b8':q.level==='Thông hiểu'?'#16865c':'#a35c00'};font-weight:800">${q.level}</span></div><h3>${q.q}</h3><div class="options">${q.o.map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"><span>${String.fromCharCode(65+j)}. ${o}</span></label>`).join('')}</div><div class="explain" id="exp${i}"></div></article>`).join('');$('result').classList.remove('show');}
+$('gradeBtn').addEventListener('click',()=>{let score=0,answered=0;questions.forEach((q,i)=>{let box=document.querySelector(`[data-q="${i}"]`),picked=box.querySelector('input:checked');box.querySelectorAll('.option').forEach((el,j)=>{el.classList.remove('correct','wrong');if(j===q.a)el.classList.add('correct');if(picked&&+picked.value===j&&j!==q.a)el.classList.add('wrong')});let exp=$('exp'+i);exp.textContent='Đáp án: '+String.fromCharCode(65+q.a)+'. '+q.e;exp.classList.add('show');if(picked){answered++;if(+picked.value===q.a)score++}});let r=$('result');r.innerHTML=`<strong>Kết quả: ${score}/6 câu đúng</strong><p>Bạn đã trả lời ${answered}/6 câu. ${score===6?'Xuất sắc! Bạn đã nắm rất vững kiến thức.':score>=4?'Khá tốt! Hãy xem lại lời giải của các câu chưa đúng.':'Hãy ôn lại công thức và quan sát mô phỏng, sau đó thử lại nhé.'}</p>`;r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'})});
+$('quizReset').addEventListener('click',renderQuiz);
+renderQuiz();update();requestAnimationFrame(animate);
+</script>
+</body>
+</html>
